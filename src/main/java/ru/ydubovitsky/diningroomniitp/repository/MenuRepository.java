@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface MenuRepository extends JpaRepository<Menu, Short> {
 
-    List<Menu> findByDate(Date date);
+    Menu findByDate(Date date);
 
     @Query(value = "SELECT * FROM TABLE_MENU where date like %:dateString%", nativeQuery = true)
-    List<Menu> findByDateLike(String dateString);
+    Menu findByDateLike(String dateString);
 }

@@ -13,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class MenuRequestDto {
 
+    private Short id;
     private Date date;
     private Set<MenuEntity> menuEntities;
 

@@ -1,5 +1,6 @@
 package ru.ydubovitsky.diningroomniitp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,5 +18,9 @@ public class Ingredient {
     private Short id;
 
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private MealItem mealItem;
 
 }

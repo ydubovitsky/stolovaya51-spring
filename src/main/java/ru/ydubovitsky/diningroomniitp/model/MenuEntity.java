@@ -1,5 +1,6 @@
 package ru.ydubovitsky.diningroomniitp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,7 +21,15 @@ public class MenuEntity {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Menu menu;
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
+    )
     private List<MenuItem> menuItems;
 
 

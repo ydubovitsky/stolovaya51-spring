@@ -10,4 +10,6 @@ public class DiningRoomNiitpApplication {
 		SpringApplication.run(DiningRoomNiitpApplication.class, args);
 	}
 
+
+
 }

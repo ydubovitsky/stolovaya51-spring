@@ -30,6 +30,10 @@ public class MenuItem {
 
     private Integer cost;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private User user;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

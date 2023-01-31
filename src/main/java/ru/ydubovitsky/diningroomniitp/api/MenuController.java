@@ -3,6 +3,7 @@ package ru.ydubovitsky.diningroomniitp.api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.ydubovitsky.diningroomniitp.dto.MenuRequestDto;
 import ru.ydubovitsky.diningroomniitp.model.Menu;
@@ -19,12 +20,14 @@ public class MenuController {
     private final MenuServiceInterface menuService;
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPER_ADMIN', 'OWNER')")
     public HttpStatus addNewMenu(@RequestBody MenuRequestDto menuRequestDto) {
         menuService.saveMenu(menuRequestDto);
         return HttpStatus.OK;
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPER_ADMIN', 'OWNER')")
     public ResponseEntity<?> updateMenu(@RequestBody MenuRequestDto menuRequestDto) {
         Menu menu = menuService.updateMenu(menuRequestDto);
         return ResponseEntity.ok(menu);

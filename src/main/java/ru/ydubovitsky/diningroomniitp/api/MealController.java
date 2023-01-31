@@ -2,6 +2,7 @@ package ru.ydubovitsky.diningroomniitp.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.ydubovitsky.diningroomniitp.dto.MealRequestDto;
 import ru.ydubovitsky.diningroomniitp.dto.MealResponseDto;
@@ -30,6 +31,7 @@ public class MealController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPER_ADMIN', 'OWNER')")
     public ResponseEntity<?> addNewMeal(@RequestBody MealRequestDto mealRequestDto) {
         MealItem createdMealItem = mealService.createNewMeal(mealRequestDto);
         return ResponseEntity.ok(createdMealItem);

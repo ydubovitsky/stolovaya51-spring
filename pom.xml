@@ -101,6 +101,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<imageName>ydubovitsky/dining-room-spring</imageName>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

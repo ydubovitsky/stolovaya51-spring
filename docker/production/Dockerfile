@@ -1,6 +1,6 @@
 # How to run me?
-# docker build . -f ./docker/production/Dockerfile -t app:0.1
-# docker run -d --rm -p 80:8000 --name app app:0.1
+# docker build . -f ./docker/production/Dockerfile -t stolovaya51-spring:0.0.1
+# docker run -d --rm -p 80:8000 --name stolovaya51-spring stolovaya51-spring:0.0.1
 
 # How to make request from cmd?
 # curl -v http://localhost:80/api/v1/meal/all
@@ -23,6 +23,6 @@ WORKDIR /opt/app
 
 # Copy the dining-room-spring.jar from the maven stage to the /opt/app directory of the current stage.
 # TODO How i can set name of the final .jar?
-COPY --from=maven ./app/target/dining-room-spring.jar .
+COPY --from=maven ./app/target/stolovaya51-spring.jar .
 EXPOSE 8080
-ENTRYPOINT ["java","-jar", "dining-room-spring.jar"]
+ENTRYPOINT ["java","-jar", "stolovaya51-spring.jar"]

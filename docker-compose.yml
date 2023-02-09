@@ -1,18 +1,67 @@
 # Run it: docker-compose up -d
-# Run only one service: docker-compose up -d stolovaya51-react-dev
+# Run only one service: docker-compose up -d stolovaya51-spring
 
 version: '3'
 services:
   # You can rename this service special for docker-hub like: ydubovitsky/stolovaya51
-  stolovaya51-spring-dev:
-    container_name: stolovaya51-spring-dev
-    build:
-      dockerfile: ./docker/dev/Dockerfile
-    ports:
-      - "8080:8080"
-  stolovaya51-spring-production:
-    container_name: stolovaya51-spring-production
+  stolovaya51-spring:
+    container_name: stolovaya51-spring
     build:
       dockerfile: ./docker/production/Dockerfile
+    environment:
+      PROFILE_ACTIVE: postgres
+      ADMIN_NAME: admin
+      ADMIN_PASSWORD: password
+      POSTGRES_URL: jdbc:postgresql://postgres_container:5432/postgres
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: changeme
+      POSTGRES_DDL_AUTO: create-drop
+      POSTGRES_DDL: true
+    depends_on:
+      - postgres
+      - pgadmin
+    networks:
+      - postgres
     ports:
       - "8080:8080"
+
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:

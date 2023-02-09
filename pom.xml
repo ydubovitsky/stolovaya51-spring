@@ -96,11 +96,14 @@
 	</dependencies>
 
 	<build>
+		<!--		TODO fixme! Name of target .jat-->
+		<finalName>dining-room-spring</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<!--					I don`t know why, but created path -> target/>ydubovitsky/dining-room-spring.jar-->
 					<imageName>ydubovitsky/dining-room-spring</imageName>
 					<excludes>
 						<exclude>

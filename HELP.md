@@ -9,3 +9,10 @@ https://www.baeldung.com/java-modelmapper
 
 ### H2 console link
 http://localhost:8080/h2-console
+
+### Docker
+https://medium.com/geekculture/dockerizing-a-spring-boot-application-with-maven-122286e9f582
+https://www.geeksforgeeks.org/how-to-dockerize-a-spring-boot-application-with-maven/
+
+### NGINX
+https://medium.com/southbridge/nginx-as-reverse-proxy-a62815edd8c1

@@ -8,10 +8,10 @@
 		<version>2.5.6</version>
 		<relativePath/>
 	</parent>
-	<groupId>ru.y-dubovitsky</groupId>
-	<artifactId>dining-room-niitp</artifactId>
+	<groupId>ru.ydubovitsky</groupId>
+	<artifactId>stolovaya51-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>dining-room-niitp</name>
+	<name>stolovaya51-spring</name>
 	<description>REST API for dining room Niitp application</description>
 	<properties>
 		<java.version>11</java.version>
@@ -97,14 +97,14 @@
 
 	<build>
 		<!--		TODO fixme! Name of target .jat-->
-		<finalName>dining-room-spring</finalName>
+		<finalName>stolovaya51-spring</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<!--					I don`t know why, but created path -> target/>ydubovitsky/dining-room-spring.jar-->
-					<imageName>ydubovitsky/dining-room-spring</imageName>
+					<imageName>ydubovitsky/stolovaya51-spring</imageName>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

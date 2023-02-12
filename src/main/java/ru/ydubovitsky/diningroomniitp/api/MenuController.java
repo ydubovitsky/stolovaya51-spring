@@ -33,16 +33,6 @@ public class MenuController {
         return ResponseEntity.ok(menu);
     }
 
-    @GetMapping(params = {"day", "month", "year"})
-    public ResponseEntity<?> getMenuByYearMonthDay(
-            @RequestParam(value = "day") String day,
-            @RequestParam(value = "month") String month,
-            @RequestParam(value = "year") String year
-    ) {
-        Menu menuByDayMonthYear = menuService.getMenuByYearMonthDay(year, month, day);
-        return ResponseEntity.ok(menuByDayMonthYear);
-    }
-
     @GetMapping(params = {"date"})
     public ResponseEntity<?> getMenuByDate(@RequestParam(value = "date") LocalDate date) {
         Menu menuByDayMonthYear = menuService.getMenuByDate(Date.valueOf(date));

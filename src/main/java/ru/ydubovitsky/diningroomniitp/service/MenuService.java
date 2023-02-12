@@ -39,12 +39,6 @@ public class MenuService implements MenuServiceInterface {
         return updateMenuIfExists(MenuFacade.menuRequestDtoToMenu(menuRequestDto));
     }
 
-    //!TODO Сделать другой метод, этот прям вырви глаз плохой
-    public Menu getMenuByYearMonthDay(String year, String month, String day) {
-        String dateString = year + "-" + month + "-" + day;
-        return menuRepository.findByDateLike(dateString);
-    }
-
     public Menu getMenuByDate(Date date) {
         return menuRepository.findByDate(date);
     }

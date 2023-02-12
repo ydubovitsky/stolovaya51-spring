@@ -11,8 +11,6 @@ public interface MenuServiceInterface {
 
     Menu updateMenu(MenuRequestDto menuRequestDto);
 
-    Menu getMenuByYearMonthDay(String year, String month, String day);
-
     Menu getMenuByDate(Date date);
 
 }

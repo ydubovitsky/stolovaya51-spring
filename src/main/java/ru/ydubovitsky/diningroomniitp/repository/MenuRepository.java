@@ -11,6 +11,4 @@ public interface MenuRepository extends JpaRepository<Menu, Short> {
 
     Menu findByDate(Date date);
 
-    @Query(value = "SELECT * FROM TABLE_MENU where date like %:dateString%", nativeQuery = true)
-    Menu findByDateLike(String dateString);
 }

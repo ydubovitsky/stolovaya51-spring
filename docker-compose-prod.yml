@@ -1,5 +1,5 @@
-# Run it: docker-compose up -d
-# Run only one service: docker-compose up -d stolovaya51-spring
+# How to use it?
+# docker compose -f docker-compose-prod.yml up
 
 version: '3'
 services:
@@ -15,7 +15,7 @@ services:
       POSTGRES_URL: jdbc:postgresql://postgres_container:5432/postgres
       POSTGRES_USERNAME: postgres
       POSTGRES_PASSWORD: changeme
-      POSTGRES_DDL_AUTO: create-drop
+      POSTGRES_DDL_AUTO: create
     depends_on:
       - postgres
       - pgadmin
@@ -23,6 +23,15 @@ services:
       - postgres
     ports:
       - "8080:8080"
+
+  stolovaya51-react-production:
+    container_name: stolovaya51-react-production
+    image: ydubovitsky/stolovaya51-react:0.0.1
+    networks:
+      - postgres
+    restart: unless-stopped
+    ports:
+      - "80:80"
 
   postgres:
     container_name: postgres_container

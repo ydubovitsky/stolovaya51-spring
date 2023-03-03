@@ -36,4 +36,11 @@ public class MealController {
         MealItem createdMealItem = mealService.createNewMeal(mealRequestDto);
         return ResponseEntity.ok(createdMealItem);
     }
+
+    @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'SUPER_ADMIN', 'OWNER')")
+    public ResponseEntity<?> addNewMeal(@PathVariable(name = "id") Short id) {
+        mealService.deleteMealById(id);
+        return ResponseEntity.ok(id);
+    }
 }

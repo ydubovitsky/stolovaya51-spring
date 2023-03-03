@@ -33,4 +33,9 @@ public class MealService {
         log.info(String.format("New meal with name %s saved", mealRequestDto.getName()));
         return savedMealItem;
     }
+
+    public void deleteMealById(Short id) {
+        mealRepository.deleteById(id);
+        log.info(String.format("Meal with id %s deleted", id));
+    }
 }

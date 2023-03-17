@@ -14,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode
 public class MealItem {
 
     @Id
@@ -27,8 +28,9 @@ public class MealItem {
 
     private String description;
 
-    @OneToOne
     @JsonIgnore
+    @OneToOne(mappedBy = "mealItem", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
     private MenuItem menuItem;
 
     @OneToMany(
@@ -37,20 +39,4 @@ public class MealItem {
             orphanRemoval = true
     )
     private Set<Ingredient> ingredientSet;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MealItem mealItem = (MealItem) o;
-        return Objects.equals(id, mealItem.id) &&
-                Objects.equals(name, mealItem.name) &&
-                Objects.equals(calories, mealItem.calories) &&
-                Objects.equals(description, mealItem.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, calories, description);
-    }
 }

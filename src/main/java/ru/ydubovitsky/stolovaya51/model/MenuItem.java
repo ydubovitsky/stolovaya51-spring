@@ -13,6 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode
 public class MenuItem {
 
     @Id
@@ -23,7 +24,8 @@ public class MenuItem {
     @JsonIgnore
     private MenuEntity menuEntity;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "mealItem_id")
     private MealItem mealItem;
 
     private String portion;
@@ -34,18 +36,4 @@ public class MenuItem {
     @JsonIgnore
     private User user;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MenuItem menuItem = (MenuItem) o;
-        return Objects.equals(id, menuItem.id) &&
-                Objects.equals(portion, menuItem.portion) &&
-                Objects.equals(cost, menuItem.cost);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, portion, cost);
-    }
 }

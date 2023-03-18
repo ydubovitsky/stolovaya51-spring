@@ -28,11 +28,6 @@ public class MealItem {
 
     private String description;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "mealItem", cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
-    private MenuItem menuItem;
-
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,

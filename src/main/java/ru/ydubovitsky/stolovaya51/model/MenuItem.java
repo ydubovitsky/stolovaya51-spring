@@ -20,12 +20,11 @@ public class MenuItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Short id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private MenuEntity menuEntity;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "mealItem_id")
+    @OneToOne
     private MealItem mealItem;
 
     private String portion;

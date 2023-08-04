@@ -5,12 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import ru.ydubovitsky.stolovaya51.dto.DateRequestDto;
 import ru.ydubovitsky.stolovaya51.dto.MenuRequestDto;
 import ru.ydubovitsky.stolovaya51.model.Menu;
 import ru.ydubovitsky.stolovaya51.service.MenuServiceInterface;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api/v1/menu")
@@ -34,8 +36,14 @@ public class MenuController {
     }
 
     @GetMapping(params = {"date"})
-    public ResponseEntity<?> getMenuByDate(@RequestParam(value = "date") LocalDate date) {
-        Menu menuByDayMonthYear = menuService.getMenuByDate(Date.valueOf(date));
+    public ResponseEntity<?> getMenuByDate(@RequestParam(value = "date") String date) {
+        Menu menuByDayMonthYear = menuService.getMenuByDate(convertStringToDate(date));
         return ResponseEntity.ok(menuByDayMonthYear);
+    }
+
+    private static final Date convertStringToDate(String string) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.MM.yyyy");
+        LocalDate localDate = LocalDate.parse(string, formatter);
+        return Date.valueOf(localDate);
     }
 }
